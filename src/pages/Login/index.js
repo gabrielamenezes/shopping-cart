@@ -6,6 +6,7 @@ import {
 import { Button, Input, InputLabel, InputAdornment } from '@mui/material'
 
 function Login() {
+  console.log('entrei')
   return (
     <Container>
       <Titulo>
