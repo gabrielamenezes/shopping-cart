@@ -4,9 +4,12 @@ import {
   InputContainer
 } from './styles';
 import { Button, Input, InputLabel, InputAdornment } from '@mui/material'
-
+import {useNavigate} from 'react-router-dom'
+import { useContext } from 'react';
+import { UsuarioContext } from 'common/context/Usuario';
 function Login() {
-  console.log('entrei')
+  const navigate = useNavigate();
+  const usuario = useContext(UsuarioContext);
   return (
     <Container>
       <Titulo>
@@ -18,6 +21,8 @@ function Login() {
         </InputLabel>
         <Input
           type="text"
+          value={usuario.nome}
+          onChange={(e) => usuario.setNome(e.target.value)}
         />
       </InputContainer>
       <InputContainer>
@@ -26,6 +31,8 @@ function Login() {
         </InputLabel>
         <Input
         type="number"
+        value={usuario.saldo}
+        onChange={(e) => usuario.setSaldo(e.target.value)}
         startAdornment={
           <InputAdornment position="start">
             R$
@@ -36,6 +43,7 @@ function Login() {
       <Button
         variant="contained"
         color="primary"
+        onClick={() => navigate('/feira')}
       >
         Avançar
       </Button>
