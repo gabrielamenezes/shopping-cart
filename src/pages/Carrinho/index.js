@@ -1,12 +1,10 @@
 import { Button, Snackbar, InputLabel } from '@mui/material';
 import MuiAlert from '@mui/lab/Alert';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Container, Voltar, TotalContainer, PagamentoContainer} from './styles';
-import { UsuarioContext } from 'common/context/Usuario';
 
 function Carrinho() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const usuario = useContext(UsuarioContext)
   return (
     <Container>
       <Voltar />
