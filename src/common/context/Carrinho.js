@@ -64,7 +64,7 @@ export const useCarrinhoContext = () => {
     useEffect(() => {
       const novaQuantidade = carrinho.reduce((quantidadeInicial, produto) => quantidadeInicial + produto.quantidade, 0 )
       setQuantidadeDeProdutos(novaQuantidade)
-    }, [carrinho])
+    }, [carrinho, setQuantidadeDeProdutos])
     return {
         carrinho, setCarrinho, adicionarProduto, removerProduto, quantidadeDeProdutos
     }

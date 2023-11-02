@@ -6,7 +6,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { useCarrinhoContext } from "common/context/Carrinho";
 
 function Produto({ nome, foto, id, valor, unidade }) {
-  const {carrinho, adicionarProduto, removerProduto, quantidadeDeProdutos} = useCarrinhoContext();
+  const {carrinho, adicionarProduto, removerProduto} = useCarrinhoContext();
   const produtoNoCarrinho = carrinho.find(itemDoCarrinho => itemDoCarrinho.id === id);
   return (
     <Container>
