@@ -9,7 +9,7 @@ import { useContext } from 'react';
 import { UsuarioContext } from 'common/context/Usuario';
 function Login() {
   const navigate = useNavigate();
-  const usuario = useContext(UsuarioContext);
+  const {nome,setNome, saldo, setSaldo} = useContext(UsuarioContext);
   return (
     <Container>
       <Titulo>
@@ -21,8 +21,8 @@ function Login() {
         </InputLabel>
         <Input
           type="text"
-          value={usuario.nome}
-          onChange={(e) => usuario.setNome(e.target.value)}
+          value={nome}
+          onChange={(e) => setNome(e.target.value)}
         />
       </InputContainer>
       <InputContainer>
@@ -31,8 +31,8 @@ function Login() {
         </InputLabel>
         <Input
         type="number"
-        value={usuario.saldo}
-        onChange={(e) => usuario.setSaldo(e.target.value)}
+        value={saldo}
+        onChange={(e) => setSaldo(e.target.value)}
         startAdornment={
           <InputAdornment position="start">
             R$
@@ -43,6 +43,7 @@ function Login() {
       <Button
         variant="contained"
         color="primary"
+        disabled={nome.lenght < 4}
         onClick={() => navigate('/feira')}
       >
         Avançar
