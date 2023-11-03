@@ -3,10 +3,8 @@ import { CarrinhoProvider } from "common/context/Carrinho";
 import Carrinho from "pages/Carrinho";
 import Feira from "pages/Feira";
 import Login from "pages/Login";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { PagamentoProvider } from "common/context/Pagamento";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -25,9 +23,11 @@ const Router = () => {
   ]);
   return (
     <UsuarioProvider>
-      <CarrinhoProvider>
-        <RouterProvider router={router} />
-      </CarrinhoProvider>
+      <PagamentoProvider>
+        <CarrinhoProvider>
+          <RouterProvider router={router} />
+        </CarrinhoProvider>
+      </PagamentoProvider>
     </UsuarioProvider>
   );
 };
