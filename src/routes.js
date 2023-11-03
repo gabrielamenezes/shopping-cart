@@ -23,11 +23,11 @@ const Router = () => {
   ]);
   return (
     <UsuarioProvider>
-      <PagamentoProvider>
-        <CarrinhoProvider>
+      <CarrinhoProvider>
+        <PagamentoProvider>
           <RouterProvider router={router} />
-        </CarrinhoProvider>
-      </PagamentoProvider>
+        </PagamentoProvider>
+      </CarrinhoProvider>
     </UsuarioProvider>
   );
 };
