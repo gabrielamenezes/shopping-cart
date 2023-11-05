@@ -1,4 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { usePagamentoContext } from "./Pagamento";
+import { UsuarioContext } from "./Usuario";
 //cria o contexto
 export const CarrinhoContext = createContext();
 // muda o nome do contexto para a extensão do react no chrome
@@ -20,6 +22,8 @@ export const CarrinhoProvider = ({children}) => {
 export const useCarrinhoContext = () => {
   //pega os valores do provider
     const {carrinho, setCarrinho, setQuantidadeDeProdutos, quantidadeDeProdutos, valorTotalCarrinho, setValorTotalCarrinho} = useContext(CarrinhoContext);
+    const {formaPagamento} = usePagamentoContext();
+    const {setSaldo} = useContext(UsuarioContext);
 
     function mudarQuantidade(id, quantidade) {
       //percorrer os itens do carrinho
@@ -61,6 +65,11 @@ export const useCarrinhoContext = () => {
       setCarrinho(mudarQuantidade(id, -1))
     }
 
+    const efetuarCompra = () => {
+      setCarrinho([]);
+      setSaldo(saldoAtual => saldoAtual - valorTotalCarrinho)
+
+    }
     //sempre que o carrinho mudar, vamos precisar fazer um count de quantidade de produtos no carrinho
     useEffect(() => {
       const {novaQuantidade, novoTotal} = carrinho.reduce((quantidadeInicial, produto) => ({
@@ -69,14 +78,16 @@ export const useCarrinhoContext = () => {
       
       }), {novaQuantidade: 0, novoTotal: 0} )
       setQuantidadeDeProdutos(novaQuantidade)
-      setValorTotalCarrinho(novoTotal)
-    }, [carrinho, setQuantidadeDeProdutos, setValorTotalCarrinho])
+      setValorTotalCarrinho(novoTotal * formaPagamento.juros)
+    }, [carrinho, setQuantidadeDeProdutos, setValorTotalCarrinho, formaPagamento])
     return {
         carrinho,
         setCarrinho,
         adicionarProduto,
         removerProduto,
         quantidadeDeProdutos,
-        valorTotalCarrinho
+        valorTotalCarrinho,
+        setSaldo,
+        efetuarCompra
     }
 }
